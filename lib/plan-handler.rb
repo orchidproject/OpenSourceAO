@@ -21,7 +21,7 @@ class PlanHandler
 
 	
 	def build_uri(path) 
-		uri = URI("http://aicvm-orchid1.ecs.soton.ac.uk/"+path)
+		uri = URI("http://aicvm-orchid1.ecs.soton.ac.uk/test/"+path)
 		http = nil
 
 		if (Controller::PROXY_ADDRESS == "no_proxy")	
