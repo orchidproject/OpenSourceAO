@@ -8,6 +8,44 @@ it moves an agent along a fix route
 
 */ 
 
+
+var database="jtruck_db";
+var db_username="jtruck";
+var db_password="jtruck";
+var mysql = require('mysql');
+var DATABASE = database;
+var client = mysql.createClient({
+    user: db_username,
+    password: db_password
+});
+client.query('USE '+DATABASE);
+
+
+var dp = [];
+(function(id){
+    if(!id){
+        return;
+    }
+    var query = 'SELECT * FROM dropoffpoints  WHERE game_layer_id='+id;
+    
+    client.query(
+        query,
+        function selectCb(err, results, fields) {
+            
+            if (err) {
+                throw err;
+            }
+            console.log(query);
+            for(i=0;i<results.length;i++){
+                dp[i] = { lat: results[i].latitude , lng: results[i].longitude};
+            }
+        }
+    );
+   
+})(process.argv[2]);
+
+
+
 //record the pid of the agent script so that it can be killed
 var fs = require('fs');
 var f = fs.createWriteStream("./agent/pids.txt", {flags:"a"});
@@ -20,7 +58,6 @@ var game_id=process.argv[2];
 var role=process.argv[3];
 
 var players =  [];
-var dp = [{lat:52.9521738,lng:-1.1862338},{lat:52.9517213,lng:-1.1845815}];
 
 var Helper = require('../agent_helper');
 var helper = new Helper(game_id);
@@ -164,8 +201,8 @@ function mainloop(id){
     }, 500);
     
    
-    p.lat = 52.9521738;
-    p.lng = -1.1862338;
+    p.lat = dp[0].lat;
+    p.lng = dp[0].lng;
     
     /*
     var path = null;
