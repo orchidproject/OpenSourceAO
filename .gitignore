@@ -17,3 +17,9 @@ Gemfile
 *~
 .rvmrc
 *swp
+agent/exposed_scripts/logs/*
+agent/pids.txt
+kill.sh
+main-runtime.js
+output
+output1
