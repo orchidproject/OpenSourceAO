@@ -1,0 +1,37 @@
+          <div class="row " ng-show="editMode"  >
+              <div class="well well-sm ">Unassigned players</div>
+          </div>
+
+
+          <div class="row" ng-show="editMode">
+          <!-- the idle tasks -->
+          <div class="col-sm-3" style="width:60;position:relative">
+            
+          </div> 
+          <!-- the idle tasks end-->
+          <!-- idle player list -->
+          <div class="col-sm-6 " style="margin-left:2" >
+              <div 
+               ng-show="editMode" class = "card-fixed player-card player-draggable player-droppable transparent-5"  
+              >
+                Drop here to unassign players
+              </div>
+              <!-- player list -->
+              <div 
+              class = "player-card player-draggable player-droppable transparent-5"  
+              ng-repeat = "p in players | filter: filterIdlePlayers" 
+              
+              playerId = "{{p.id}}"
+              ng-mouseover="focus(0-p.id-1)" 
+              ng-mouseout="unFocus(0-p.id-1)" 
+              ng-init = "initEditables()"
+              ng-class = "{'focus':getClass(0-p.id-1),'card':editMode,'card-fixed':!editMode, 'unRead': unRead(p.id)}"
+              >
+
+                <img ng-src = "{{getPlayerIcon(p.id)}}" > No task
+                 <div class = "health"><div style="height:{{getHealth(p.id)}}"></div></div>
+                <span ng-show="editMode" class="glyphicon glyphicon-move corner"></span>
+              </div>
+          </div>
+          <!-- idle player list end -->
+          </div>

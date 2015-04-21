@@ -1,0 +1,145 @@
+<script type="text/javascript">
+  var test =  <%= @test %>
+  var layerId =  <%= @game.layer_id %>;
+
+  $(function(){
+  	if(!document.getElementById("map")) {
+  		return;
+  	}
+
+  	var myOptions = {
+  		zoom: 15,
+  		center: new google.maps.LatLng(<%= @game.latitude %>, <%= @game.longitude %>),
+  		mapTypeId: google.maps.MapTypeId.MAP,
+  		mapTypeControl: true,
+		disableDoubleClickZoom: true
+  	};
+
+  	// Create the main map
+  	map = new google.maps.Map(document.getElementById("map"), myOptions);
+    GameMap.fitToRadius(<%= @game.radius %>);
+    //G_getPixelFromMap(new google.maps.LatLng(52.954384, -1.191799));
+  });
+
+</script> 
+
+<%= erb(:partialMsg, :layout => false) %>
+<%= erb(:partialModals, :layout => false) %>
+
+<div style="width:100%; height:4%" >
+      <input type="file" style="float:left" id="state_input"  />
+      <input type="file" style="float:left" id="log_input"  />   
+</div>
+
+<div  ng-controller = "NewAssignmentCtrl" id="main">
+	<div class="row">
+		<div id ="map" class="col-sm-6 col-lg-6"></div>
+		<div class="container col-sm-6 col-lg-6"> 
+      <div class="row ">
+        <div class="big-btn col-sm-4 ">
+          <div class="btn btn-sm btn-primary full-btn" ng-disabled="fetching" ng-click="getPlan()"> 
+            Request plan
+          </div>
+
+        </div>
+        <div class="big-btn col-sm-4">
+          <div class="btn btn-sm btn-primary full-btn" ng-click="toggleEditMode()"> 
+            {{edit_indicator}}
+          </div>
+        </div>
+          <div class="big-btn col-sm-4 ">
+          <div class="btn btn-sm btn-primary full-btn" ng-disabled="!allowConfirm()" ng-click="confirmAll(true)"> 
+            Confirm all
+          </div>
+          </div>
+          
+         
+
+      </div>
+      <div class="row " ng-show="editMode">
+           <div class="big-btn col-sm-4 ">
+           <div class="btn btn-sm btn-danger full-btn" ng-click="undoAll()"> 
+            Undo all
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 h5 well well-sm " > New Assignments </div>
+
+        <div class="col-sm-4 h5 well well-sm"  data-toggle="modal" data-target="#agentModal"> Current Assignments </div>
+        <div class="col-sm-1 h5 well well-sm"  data-toggle="modal" data-target="#testModal"> Feedbacks </div>
+      </div>
+
+	<div class = "row"   >
+	<div  class="col-sm-6 drag-container" ng-show="editMode" >
+
+
+          <%= erb(:partialAssignmentList, :layout => false) %>
+          <%= erb(:partialUnchangedList, :layout => false) %>
+          <!-- new indicator -->
+          <div class="row transparent-5" ng-show = "editMode" >
+            <div class="col-sm-2 card-fixed task-card task-droppable"> 
+              Drop task here 
+              <span class="glyphicon glyphicon-plus corner"></span> 
+            </div>
+            <div class="col-sm-6"> 
+              <div class = "card-fixed player-card" playerHolder = "1"></div>
+              <div class = "card-fixed player-card" playerHolder = "2"></div>
+            </div>
+          </div>
+<!-- new indicator end -->
+          <%= erb(:partialIdlePlayerList, :layout => false) %>
+  </div>
+  <div  class="col-sm-6 drag-container" ng-show="!planPending" >
+    <!-- place holder -->
+  </div>
+	
+       <%= erb(:partialPreviousList, :layout => false) %>
+       <div class="bottom-right" style="background-color:white">
+<!--
+          <div class = "row" >
+            Unassigned Tasks:
+          </div>
+          <div class = "row ">  
+            <div class = "col-sm-1 card task-card " ng-repeat = "t in tasks | filter: filterPrevUnassignedTasks" taskId = "{{t.id}}" ng-init="initD()" ng-class="getClass(t.id)">
+              <img ng-src = "{{getTaskIcon(t.id)}}"  /> 
+             
+            </div>
+          </div>
+-->
+          			</div>
+		</div>
+
+	</div>
+	<div class="bottom-left" style="background-color:#BFE8E8">
+          <div class = "row ">  
+            <div 
+            class = "col-sm-1 task-card task-draggable" 
+            ng-repeat = "t in tasks | filter: filterUnassignedTasks | orderBy:'type':false" 
+            taskId = "{{t.id}}" 
+            
+            ng-mouseover="focus(t.id)" 
+            ng-mouseout="unFocus(t.id)" 
+            ng-class = "{'focus':getClass(t.id),'card':editMode,'card-fixed':!editMode}"
+            ng-init = "initEditables()"
+            >
+              <img ng-src = "{{getTaskIcon(t.id)}}" /> 
+              <span ng-show="editMode" class="glyphicon glyphicon-move corner"></span> 
+              {{t.getTime()}}
+            </div>
+  
+
+          </div>
+	  
+                      </div>
+          </div>
+  <input type="hidden" id="layer_id" value="<%= @game.layer_id %>" />
+  <input type="hidden" id="user_id" value="<%= @user_id %>" />
+  <input type="hidden" id="user_initials" value="<%= @user_initials %>" />
+  <input type="hidden" id="group_token" value="<%= @game.layer_id %>" />
+  <input type="hidden" id="game_status" value="<%= @game.is_active %>" />
+
+</div> 
+
+
