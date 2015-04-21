@@ -16,3 +16,4 @@ config.yml
 Gemfile
 *~
 .rvmrc
+*swp
