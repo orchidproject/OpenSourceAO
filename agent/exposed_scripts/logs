@@ -1,33 +1,80 @@
-SELECT * FROM dropoffpoints  WHERE game_layer_id=10
+SELECT * FROM dropoffpoints  WHERE game_layer_id=63
 parsed: localhost
 parsed: localhost
 parsed: localhost
 parsed: localhost
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"30","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"medic","user_id":53}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"31","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"medic","user_id":241}
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"36","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"firefighter","user_id":54}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"37","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"firefighter","user_id":242}
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"32","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"soldier","user_id":55}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"33","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"soldier","user_id":243}
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"36","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"transporter","user_id":56}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"37","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"transporter","user_id":244}
 parsed: localhost
 parsed: localhost
 parsed: localhost
 parsed: localhost
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"30","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"medic","user_id":57}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"31","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"medic","user_id":245}
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"36","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"firefighter","user_id":58}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"37","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"firefighter","user_id":246}
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"32","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"soldier","user_id":59}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"33","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"soldier","user_id":247}
 STATUS: 200
-HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"36","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
-game join status: {"skill":"transporter","user_id":60}
+HEADERS: {"content-type":"application/json","access-control-allow-origin":"*","content-length":"37","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+game join status: {"skill":"transporter","user_id":248}
+test: 0
+test: 1
+test: 2
+test: 3
+test: 4
+test: 5
+test: 6
+test: 7
+count:0 ratio:0
+instruction: {"teammate":248,"task":675,"direction":"go","status":1,"id":442,"player_id":241,"frame_id":71,"frame_size":8,"path":[{"lat":"0.185587723E2","lng":"-0.723176551E2"}],"confirmed":1,"deadline":null}
+{"teammate":248,"task":675,"direction":"go","status":1,"id":442,"player_id":241,"frame_id":71,"frame_size":8,"path":[{"lat":"0.185587723E2","lng":"-0.723176551E2"}],"confirmed":1,"deadline":null}
+begin drop off 241 : 248
+test: 8
+count:1 ratio:0.125
+instruction: {"teammate":241,"task":675,"direction":"go","status":1,"id":443,"player_id":248,"frame_id":71,"frame_size":8,"path":[{"lat":"0.185587723E2","lng":"-0.723176551E2"}],"confirmed":1,"deadline":null}
+{"teammate":241,"task":675,"direction":"go","status":1,"id":443,"player_id":248,"frame_id":71,"frame_size":8,"path":[{"lat":"0.185587723E2","lng":"-0.723176551E2"}],"confirmed":1,"deadline":null}
+begin drop off 248 : 241
+test: 9
+count:2 ratio:0.25
+instruction: {"teammate":-1,"task":-1,"direction":"stop","status":1,"id":444,"player_id":242,"frame_id":71,"frame_size":8,"path":[],"confirmed":1,"deadline":0}
+test: 10
+count:3 ratio:0.375
+instruction: {"teammate":-1,"task":-1,"direction":"stop","status":1,"id":445,"player_id":243,"frame_id":71,"frame_size":8,"path":[],"confirmed":1,"deadline":0}
+test: 11
+count:4 ratio:0.5
+instruction: {"teammate":-1,"task":-1,"direction":"stop","status":1,"id":446,"player_id":244,"frame_id":71,"frame_size":8,"path":[],"confirmed":1,"deadline":0}
+test: 12
+count:5 ratio:0.625
+instruction: {"teammate":-1,"task":-1,"direction":"stop","status":1,"id":447,"player_id":245,"frame_id":71,"frame_size":8,"path":[],"confirmed":1,"deadline":0}
+test: 13
+count:6 ratio:0.75
+instruction: {"teammate":-1,"task":-1,"direction":"stop","status":1,"id":448,"player_id":246,"frame_id":71,"frame_size":8,"path":[],"confirmed":1,"deadline":0}
+test: 14
+count:7 ratio:0.875
+instruction: {"teammate":-1,"task":-1,"direction":"stop","status":1,"id":449,"player_id":247,"frame_id":71,"frame_size":8,"path":[],"confirmed":1,"deadline":0}
+test: 15
+STATUS: 200
+HEADERS: {"content-type":"text/html;charset=utf-8","access-control-allow-origin":"*","content-length":"32","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+BODY: [object Object]
+STATUS: 200
+HEADERS: {"content-type":"text/html;charset=utf-8","access-control-allow-origin":"*","content-length":"32","connection":"keep-alive","server":"thin 1.5.0 codename Knife"}
+BODY: [object Object]
+movement finished
+248 wait for 241
+movement finished
+STATUS: 400
+HEADERS: {"content-type":"text/plain","connection":"close","server":"thin 1.5.0 codename Knife"}
