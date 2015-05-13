@@ -201,8 +201,8 @@ function mainloop(id){
     }, 500);
     
    
-    p.lat = dp[0].lat;
-    p.lng = dp[0].lng;
+    p.lat = parseFloat(dp[0].lat);
+    p.lng = parseFloat(dp[0].lng);
     
     /*
     var path = null;
@@ -316,7 +316,8 @@ function moveOneStep(lat,lng,id) {
         if(p.count<p.steps){
             players[id].lat = players[id].lat+lat;
             players[id].lng = players[id].lng+lng;        
-            //console.log(helper.player.lat+","+helper.player.lng);
+            console.log("lat lng"+players[id].lat+","+players[id].lng);
+            
             p.count+=1;    
         }
         else{
