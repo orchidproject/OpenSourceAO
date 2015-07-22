@@ -527,7 +527,7 @@ class Controller < Sinatra::Base
     game.sim_lng=DEFAULT_SIM_LNG
     game.save
     # redirect "/admin/games/#{game.layer_id}/mapeditor"
-    return {game.layer_id}.to_json
+    return  {"gamesid"=> game.layer_id}.to_json
   end
 
 
