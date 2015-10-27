@@ -2,6 +2,7 @@ class Game
   include DataMapper::Resource
   
   property :name, String
+  property :planner_url, String
   property :address, String, :length => 255
   property :latitude, String
   property :longitude, String

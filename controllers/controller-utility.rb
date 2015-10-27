@@ -143,7 +143,8 @@ class Controller < Sinatra::Base
 		:dropoffpoints=>dropoffpoint,
 		:players => player,
 		:instructions => instruction,
-		:terrains => game.terrains
+		:terrains => game.terrains,
+		:planner_url => game.planner_url
     	}
 
     end   

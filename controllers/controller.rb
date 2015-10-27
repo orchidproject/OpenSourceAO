@@ -1,5 +1,5 @@
 class Controller < Sinatra::Base 
-  
+
   def default_headers
      headers = {'Content-Type' => 'application/json', 'User-Agent' => "ruby", 'Accept' => 'application/json'}
      headers
@@ -393,9 +393,7 @@ class Controller < Sinatra::Base
    	end 
    	
     erb :'index_user', :layout => :'layout_user'
-  end
-  
-  
+  end 
   
   get '/game/:layer_id/dashboard' do
     if (params[:test])
@@ -421,9 +419,7 @@ class Controller < Sinatra::Base
     @socket_io_url=SOCKET_CLIENT_REF
    
     erb :'oldDashboard/dashboard', :layout => :'oldDashboard/layout'
-  end
-
-
+  end 
 
   get '/game/:layer_id/replay' do
     if (params[:test])
@@ -491,8 +487,12 @@ class Controller < Sinatra::Base
 			game.tasks.create :latitude=> t[:latitude], :longitude=> t[:longitude], :type=> t[:type]
 		end 
 	end 
+
+	if params[:planner_url]
+		game.planner_url = params[:planner_url] 
+	end 
 	
-	{ :saved => game.save}.to_json
+	{ :saved => game.save }.to_json
 	
   end 
 

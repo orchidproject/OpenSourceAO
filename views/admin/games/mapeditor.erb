@@ -176,8 +176,7 @@ function receiveRadiationBit(bit){
 
 }
 
-function receiveDropoffpoints(bit){
-
+function receiveDropoffpoints(bit){ 
 		point = new google.maps.LatLng(bit.latitude,bit.longitude);
                 	
         var circle = new google.maps.Circle({
@@ -257,9 +256,9 @@ $(function(){
 		    <li><a href="#editor-tabs-3">Game area</a></li>
 		    <li><a href="#editor-tabs-4">Terrain</a></li>
 		    <li><a href="#editor-tabs-5">Cloud</a></li>
-
-
+		    <li><a href="#editor-tabs-6">Agent</a></li> 
 		</ul>	
+
 		<div id="editor-tabs-1" >
 			<div style="padding: 3px;">
 					  <p><h5>Deploy target types</h5> To place target type on map click button once and then click on<br> location on map.</p>
@@ -326,6 +325,9 @@ $(function(){
 			
 		</div>
  
+		<div id="editor-tabs-6">
+		 planner_url: <input id="planner_url" type=text value="http://aicvm-orchid1.ecs.soton.ac.uk/"/>
+		</div>
 		<br>
 		<div style="padding: 3px;">
 			  <input class="btn" type="button" id="move-to-location"  value="center"/>
