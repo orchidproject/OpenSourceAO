@@ -642,7 +642,8 @@ class Controller < Sinatra::Base
   end 
 
   get '/admin/games/:layer_id/init_agent' do
-	@agent = PlanHandler.instances(params[:layer_id].to_i)	
+	game = Game.get(params[:layer_id].to_i)
+	@agent = PlanHandler.instances(params[:layer_id].to_i,game.planner_url)	
 #	testData = File.read("./test_init.txt")
 #	result =  @agent.initPlanner(testData)	
 	result =  @agent.initPlanner(agentSnapshot(params[:layer_id],0,"init").to_json)	

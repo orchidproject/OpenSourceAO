@@ -10,18 +10,23 @@ class PlanHandler
 	end
 	#private_class_method :new
 	attr_reader :status
-	def initialize(session_id)
+	def initialize(session_id,url)
 		@doing_ask=false
 		@query_queue = []
 		@status = 2
 		@session_id =session_id
+		if url.nil?  
+			@base_url = url 
+		else 
+			@base_url = "http://aicvm-orchid1.ecs.soton.ac.uk/test/"
+		end
 	end 
 
 	private
 
 	
 	def build_uri(path) 
-		uri = URI("http://aicvm-orchid1.ecs.soton.ac.uk/test/"+path)
+		uri = URI(@base_url+path)
 		http = nil
 
 		if (Controller::PROXY_ADDRESS == "no_proxy")	

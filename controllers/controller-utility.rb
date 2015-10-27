@@ -286,7 +286,8 @@ class Controller < Sinatra::Base
   end
 
   def agentUpdateSession(game_id, frame)
-	agent = PlanHandler.instances(game_id)
+	game = Game.get(game_id)
+	agent = PlanHandler.instances(game_id,game.planner_url)
 	data = agentSnapshot(game_id,frame,"update")
 	agent.pushUpdateTask(data.to_json)	do |res|
 		#agentFetchPlan(game_id, frame) 
