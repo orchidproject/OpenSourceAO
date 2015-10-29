@@ -5,28 +5,36 @@ class PlanHandler
 	@@instances = []	
 	#@status = 0 #0 for not init, -1 for error, 1 for initializing, 2 for initialized 
 	
-	def self.instances(session_id) 	
-		return @@instances[session_id]||= PlanHandler.new(session_id)	
+	def self.instances(game) 	
+		return PlanHandler.new(game.layer_id,game.planner_url_fetch,game.planner_url_init)	
 	end
 	#private_class_method :new
 	attr_reader :status
-	def initialize(session_id,url)
+	def initialize(session_id,fetch_url,init_url)
 		@doing_ask=false
 		@query_queue = []
 		@status = 2
 		@session_id =session_id
-		if url.nil?  
-			@base_url = url 
+		if !fetch_url.nil?  
+			@fetch_url = fetch_url 
 		else 
-			@base_url = "http://aicvm-orchid1.ecs.soton.ac.uk/test/"
+			@fetch_url = "http://aicvm-orchid1.ecs.soton.ac.uk/fetch_plan.php"
 		end
+
+		if !init_url.nil?  
+			@init_url = init_url 
+		else
+			@init_url = "http://aicvm-orchid1.ecs.soton.ac.uk/init_session.php"
+		end
+		puts @init_url
 	end 
+
 
 	private
 
 	
 	def build_uri(path) 
-		uri = URI(@base_url+path)
+		uri = URI(path)
 		http = nil
 
 		if (Controller::PROXY_ADDRESS == "no_proxy")	
@@ -143,19 +151,8 @@ class PlanHandler
 		doTask
 	end 
 
+	#deprecated
 	def updateSession(data)
-		http = build_uri("update_session")
-		headers = { }
-		body = "data=" + data 
-		response = http[0].post(http[1].path,body,headers) 
-		result = JSON.parse(response.body)
-		puts "result: " + response.body
-		if(result["status"] == "ok")
-			@status = 2 
-		elsif(result["status"] == "error")
-			@status = -1 
-		end
-		result	
 	end 
 
 	def initPlanner(init_data = nil)
@@ -163,7 +160,7 @@ class PlanHandler
 			return 
 		end
 	
-		http = build_uri("init_session")  
+		http = build_uri(@init_url)  
 	 
 		#uri = URI("http://www.google.com/")
 		headers = { }
@@ -192,7 +189,7 @@ class PlanHandler
 	
 		end
 	
-		http = build_uri("fetch_plan")  
+		http = build_uri(@fetch_url)  
 		
 		#uri = URI("http://www.google.com/")
 		headers = { }

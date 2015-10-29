@@ -78,7 +78,7 @@ function create_from_template(id){
 
     
     <% @games.each do |game| 
-		agent = PlanHandler.instances(game.layer_id)
+		agent = PlanHandler.instances(game)
 	%>
 	
         <td><%= h game.name %></td>

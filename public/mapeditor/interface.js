@@ -329,7 +329,8 @@ function afterLoad(){
 }
 	
 function doBeforeSave(){
-	game.planner_url = $("#planner_url").val();
+	game.planner_url_fetch = $("#planner_url_fetch").val();
+	game.planner_url_init = $("#planner_url_init").val();
 	game.terrains = widgets.terrains;
 	game.simulation_file = simulations.filenames[$("#simulation-select")[0].selectedIndex];   
 }

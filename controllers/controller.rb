@@ -488,10 +488,14 @@ class Controller < Sinatra::Base
 		end 
 	end 
 
-	if params[:planner_url]
-		game.planner_url = params[:planner_url] 
+	if params[:planner_url_fetch]
+		game.planner_url_fetch = params[:planner_url_fetch] 
 	end 
 	
+	if params[:planner_url_init]
+		game.planner_url_init = params[:planner_url_init] 
+	end 
+
 	{ :saved => game.save }.to_json
 	
   end 
@@ -643,7 +647,7 @@ class Controller < Sinatra::Base
 
   get '/admin/games/:layer_id/init_agent' do
 	game = Game.get(params[:layer_id].to_i)
-	@agent = PlanHandler.instances(params[:layer_id].to_i,game.planner_url)	
+	@agent = PlanHandler.instances(game)	
 #	testData = File.read("./test_init.txt")
 #	result =  @agent.initPlanner(testData)	
 	result =  @agent.initPlanner(agentSnapshot(params[:layer_id],0,"init").to_json)	

@@ -2,7 +2,9 @@ class Game
   include DataMapper::Resource
   
   property :name, String
-  property :planner_url, String
+  property :planner_url_fetch, String
+  property :planner_url_init, String
+
   property :address, String, :length => 255
   property :latitude, String
   property :longitude, String
@@ -65,9 +67,7 @@ class Game
                            :data=>{
                            :system=>signal
                            }
-                           }.to_json)
-  
+                           }.to_json) 
   
   end 
-  
 end
