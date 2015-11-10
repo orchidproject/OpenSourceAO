@@ -1,5 +1,5 @@
 class Controller < Sinatra::Base 
-  
+
   def default_headers
      headers = {'Content-Type' => 'application/json', 'User-Agent' => "ruby", 'Accept' => 'application/json'}
      headers
@@ -393,9 +393,7 @@ class Controller < Sinatra::Base
    	end 
    	
     erb :'index_user', :layout => :'layout_user'
-  end
-  
-  
+  end 
   
   get '/game/:layer_id/dashboard' do
     if (params[:test])
@@ -421,9 +419,7 @@ class Controller < Sinatra::Base
     @socket_io_url=SOCKET_CLIENT_REF
    
     erb :'oldDashboard/dashboard', :layout => :'oldDashboard/layout'
-  end
-
-
+  end 
 
   get '/game/:layer_id/replay' do
     if (params[:test])
@@ -491,8 +487,16 @@ class Controller < Sinatra::Base
 			game.tasks.create :latitude=> t[:latitude], :longitude=> t[:longitude], :type=> t[:type]
 		end 
 	end 
+
+	if params[:planner_url_fetch]
+		game.planner_url_fetch = params[:planner_url_fetch] 
+	end 
 	
-	{ :saved => game.save}.to_json
+	if params[:planner_url_init]
+		game.planner_url_init = params[:planner_url_init] 
+	end 
+
+	{ :saved => game.save }.to_json
 	
   end 
 
@@ -642,7 +646,8 @@ class Controller < Sinatra::Base
   end 
 
   get '/admin/games/:layer_id/init_agent' do
-	@agent = PlanHandler.instances(params[:layer_id].to_i)	
+	game = Game.get(params[:layer_id].to_i)
+	@agent = PlanHandler.instances(game)	
 #	testData = File.read("./test_init.txt")
 #	result =  @agent.initPlanner(testData)	
 	result =  @agent.initPlanner(agentSnapshot(params[:layer_id],0,"init").to_json)	

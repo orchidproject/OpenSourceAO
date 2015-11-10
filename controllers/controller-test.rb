@@ -34,7 +34,8 @@ class Controller < Sinatra::Base
  end
 
  post '/test/:game_id/updateTask' do
-	@agent = PlanHandler.instances(params[:game_id].to_i)	
+	game = Game.get(params[:game_id].to_i)
+	@agent = PlanHandler.instances(game)	
 	t = Task.get(params[:id])
 	t.latitude = Float(params[:lat])
 	t.longitude = Float(params[:lng])
@@ -58,7 +59,8 @@ post '/test/:game_id/:frame/fetchplan' do
 	end 
 
 	time1 = Time.now	
-	@agent = PlanHandler.instances(params[:game_id].to_i)	
+	game = Game.get(params[:game_id].to_i)
+	@agent = PlanHandler.instances(game)	
 	data = agentSnapshot(params[:game_id],frame,"fetch")
 	keeps = JSON.parse(request.body.read)
 	data = keepAssignments(data,keeps)

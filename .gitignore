@@ -24,3 +24,4 @@ main-runtime.js
 output
 output1
 agent/exposed_scripts/agent.js
+cloud/*

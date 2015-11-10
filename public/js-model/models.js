@@ -12,6 +12,8 @@ function Game(game_id){
 	this.grid_size=null;//float
 	this.sim_update_interval=null;//float
 	this.terrains = null;//string JSON string representing terrains(in 2Darray) 
+	this.planner_url_fetch = null;
+	this.planner_url_init = null;
 
 	//hook functions
 	this.taskAdded = null;
@@ -80,6 +82,8 @@ function Game(game_id){
 				{latitude:value.latitude,longitude:value.longitude,radius:value.radius});
 		});
 		var instance = this
+
+		alert(this.planner_url_init);
 		$.post("/admin/games/" + instance.id + "/updateGameSettings",
 			{
 				sim_lat : this.sim_lat,
@@ -89,7 +93,9 @@ function Game(game_id){
 				grid_size : this.grid_size,
 				terrains : JSON.stringify(this.terrains),
 				tasks : tasks_to_upload ,
-				dropOffPoints : dpZones_to_upload 
+				dropOffPoints : dpZones_to_upload, 
+				planner_url_init:this.planner_url_init,
+				planner_url_fetch:this.planner_url_fetch
 
 			},
 			function(data){

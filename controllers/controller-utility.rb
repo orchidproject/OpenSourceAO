@@ -143,7 +143,9 @@ class Controller < Sinatra::Base
 		:dropoffpoints=>dropoffpoint,
 		:players => player,
 		:instructions => instruction,
-		:terrains => game.terrains
+		:terrains => game.terrains,
+		:planner_url_init => game.planner_url_init,
+		:planner_url_fetch => game.planner_url_fetch
     	}
 
     end   
@@ -285,7 +287,8 @@ class Controller < Sinatra::Base
   end
 
   def agentUpdateSession(game_id, frame)
-	agent = PlanHandler.instances(game_id)
+	game = Game.get(game_id)
+	agent = PlanHandler.instances(game)
 	data = agentSnapshot(game_id,frame,"update")
 	agent.pushUpdateTask(data.to_json)	do |res|
 		#agentFetchPlan(game_id, frame) 
